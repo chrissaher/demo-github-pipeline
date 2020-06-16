@@ -4,14 +4,15 @@ on:
   pull_request:
     branches:
       - develop
+    paths-ignore:
+      - 'README*'
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }} #ubuntu-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        os: [ubuntu-16.04, ubuntu-18.04]
         node-version: [12.x]
 
     steps:
@@ -20,18 +21,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install
-      run: |
-        npm install
-      env:
-        CI: true
-
-    - name: start
-      run: |
-        npm start
+    - name: Install dependencies
+      run: npm ci
+    - name: Build project
+      run: npm build --if-present
+    - name: Run test
+      run: npm test --if-present
     - name: Add remote origin
-      run: |
-        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_DEV }}.git
     - name: Deploy to Heroku
-      run: |
-        git push heroku HEAD:master -f
+      run: git push heroku origin/develop:refs/heads/master
