@@ -4,14 +4,16 @@ on:
   push:
     branches:
       - ft.calculator
+    paths-ignore:
+      - 'README*'
 
 jobs:
   build:
-    runs-on: ubuntu-latest #${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x] #os: [ubuntu-16.04, ubuntu-18.04]
+        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v1
