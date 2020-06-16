@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = 3000
 
 
 app.use(express.static(__dirname, {'index': ['index.html', 'login.html']}))
@@ -13,6 +12,9 @@ app.get('/calculate', (req, res)=> {
   res.send({'res': n3})
 })
 
-app.listen(port, () => {
-  console.log(`listening on port: http://localhost:${port}`)
+app.set('port', (process.env.PORT || 8889));
+
+app.listen(app.get('port'), () => {
+  port = app.get('port')
+  console.log(`Node app is running on port: ${port}`)
 })
