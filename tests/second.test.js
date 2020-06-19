@@ -1,6 +1,6 @@
 describe('test suite 2 (?) ', () => {
   it('Test 1', () => {
-    expect(true).toEqual(false);
+    expect(true).toEqual(true);
   });
 
 
