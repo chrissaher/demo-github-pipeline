@@ -1,0 +1,4 @@
+{
+  "_comment": "./tests/.*.js",
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$"
+}
