@@ -1,4 +1,4 @@
-describe('test suite 2 (?) ', () => {
+describe('This is a better suit name', () => {
   it('Test 1', () => {
     expect(true).toEqual(true);
   });
